@@ -1,0 +1,209 @@
+<div class="main-wrapper">
+  <form (ngSubmit)="formSubmit()" [formGroup]="filmEditForm">
+    <mat-card class="example-card">
+      <mat-card-header>
+        <mat-card-title>Edit film</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <mat-form-field>
+          <input
+            matInput
+            placeholder="nazov filmu"
+            formControlName="nazov"
+            required
+          />
+          <mat-error *ngIf="nazov?.errors?.required">Nazov musi byt vyplneny.</mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
+          <input
+            matInput
+            placeholder="rok vydania"
+            formControlName="rok"
+            required
+          />
+          <mat-error *ngIf="rok?.errors?.required">Rok musi byt vyplneny.</mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
+          <input matInput placeholder="ID v imdb" formControlName="imdbID" />
+        </mat-form-field>
+
+        <mat-form-field>
+          <input
+            matInput
+            placeholder="slovensky nazov filmu"
+            formControlName="slovenskyNazov"
+          />
+        </mat-form-field>
+
+        <mat-form-field>
+          <input
+            matInput
+            placeholder="poradie v rebricku AFI 1998"
+            formControlName="poradieVRebricku1998"
+          />
+        </mat-form-field>
+
+        <mat-form-field>
+          <input
+            matInput
+            placeholder="poradie v rebricku AFI 2007"
+            formControlName="poradieVRebricku2007"
+          />
+        </mat-form-field>
+
+
+
+        <div>
+          <h1>Reziseri</h1>
+          <div
+            formArrayName="reziser"
+            *ngFor="
+              let r of filmEditForm.get('reziser')['controls'];
+              let j = index
+            "
+          >
+            <div [formGroupName]="j">
+              <table class="example-full-width" cellspacing="0">
+                <tr>
+                  <td>
+                    <mat-form-field class="example-full-width">
+                      <mat-label>Krstne Meno rezisera</mat-label>
+                      <input
+                        matInput
+                        formControlName="krstneMenoR"
+                        placeholder="Krstne meno rezisera"
+                      />
+                    </mat-form-field>
+                  </td>
+                  <td>
+                    <mat-form-field class="example-full-width">
+                      <mat-label>Stredne meno rezisera</mat-label>
+                      <input
+                        matInput
+                        formControlName="stredneMenoR"
+                        placeholder="Stredne meno rezisera"
+                      />
+                    </mat-form-field>
+                  </td>
+                  <td>
+                    <mat-form-field class="example-full-width">
+                      <mat-label>Priezvisko rezisera</mat-label>
+                      <input
+                        matInput
+                        formControlName="priezviskoR"
+                        placeholder="Priezvisko rezisera"
+                      />
+                    </mat-form-field>
+                  </td>
+                </tr>
+              </table>
+
+            </div>
+            <button
+              type="button"
+              mat-stroked-button color="warn"
+              (click)="deleteReziser(i)"
+            >
+              Delete
+            </button>
+            <p> </p>
+          </div>
+
+          <button type="button" mat-raised-button color="accent" (click)="addReziser()">Pridaj rezisera</button>
+        </div>
+
+        <p> </p>
+
+
+        <div>
+          <h1>Postavy</h1>
+          <div
+            formArrayName="postava"
+            *ngFor="
+              let pos of filmEditForm.get('postava')['controls'];
+              let i = index
+            "
+          >
+            <div [formGroupName]="i">
+              <table class="example-full-width" cellspacing="0">
+                <tr>
+                  <td>
+                    <mat-form-field class="example-full-width">
+                      <mat-label>Postava</mat-label>
+                      <input
+                        matInput
+                        formControlName="postava"
+                        placeholder="Postava"
+                      />
+                    </mat-form-field>
+                  </td>
+                  <td>
+                    <mat-form-field class="example-full-width">
+                      <mat-label>Dolezitost(hlavna/vedlajsia)</mat-label>
+                      <input
+                        matInput
+                        formControlName="dolezitost"
+                        placeholder="Dolezitost postavy"
+                      />
+                    </mat-form-field>
+                  </td>
+                </tr>
+              </table>
+
+              <table class="example-full-width" cellspacing="0">
+                <tr>
+                  <td>
+                    <mat-form-field class="example-full-width">
+                      <mat-label>Krstne Meno Herca</mat-label>
+                      <input
+                        matInput
+                        formControlName="krstneMeno"
+                        placeholder="Krstne meno herca"
+                      />
+                    </mat-form-field>
+                  </td>
+                  <td>
+                    <mat-form-field class="example-full-width">
+                      <mat-label>Stredne meno</mat-label>
+                      <input
+                        matInput
+                        formControlName="stredneMeno"
+                        placeholder="Stredne meno herca"
+                      />
+                    </mat-form-field>
+                  </td>
+                  <td>
+                    <mat-form-field class="example-full-width">
+                      <mat-label>Priezvisko</mat-label>
+                      <input
+                        matInput
+                        formControlName="priezvisko"
+                        placeholder="Priezvisko herca"
+                      />
+                    </mat-form-field>
+                  </td>
+                </tr>
+              </table>
+            </div>
+            <button
+              type="button"
+              mat-stroked-button color="warn"
+              (click)="deleteItem(i)"
+            >
+              Delete
+            </button>
+            <p> </p>
+          </div>
+
+          <button type="button" mat-raised-button color="accent" (click)="addItem()">Add Item</button>
+        </div>
+      </mat-card-content>
+
+      <mat-card-actions>
+        <button type="submit" mat-raised-button color="primary" [disabled]="filmEditForm?.invalid">Save</button>
+      </mat-card-actions>
+    </mat-card>
+  </form>
+</div>

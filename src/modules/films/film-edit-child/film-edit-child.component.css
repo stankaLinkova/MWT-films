@@ -1,0 +1,27 @@
+.main-wrapper {
+    width: 100%;
+    height: 80%;
+    display: grid;
+    justify-items: center;
+    align-items: center;
+}
+
+mat-card-title{
+    display: flex;
+    justify-content: center;
+}
+
+mat-form-field{
+    display: block;
+}
+
+mat-stroked-button{
+    position: center;
+    margin-bottom: 5;
+}
+
+
+mat-card-actions{
+    display: flex;
+    justify-content: center;
+}

@@ -1,0 +1,27 @@
+<div class="login-wrapper">
+<form (ngSubmit)="formSubmit()" #formModel="ngForm">
+<mat-card class="example-card">
+    <mat-card-header>
+      <mat-card-title>Login</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <p>Auth: {{ vypisAuth }}</p>
+      <mat-form-field>
+      <input matInput placeholder="login name" [(ngModel)]="auth.name" name="name" required/>
+      <mat-hint>Your login.</mat-hint>
+      <mat-error>Login must be filled out.</mat-error>
+      </mat-form-field>
+      <mat-form-field>
+      <input matInput [type]="hide ? 'password' : 'text'" placeholder="password" [(ngModel)]="auth.password" name="passwd" required/>
+      <button type="button" matSuffix mat-icon-button aria-label="Hide password" (click)="hide = !hide">
+        <mat-icon>{{ hide ? 'visibility' : 'visibility_off'}}</mat-icon>
+      </button>
+      </mat-form-field>
+    </mat-card-content>
+    <mat-card-actions>
+      <button type="submit" mat-raised-button color="accent" [disabled]="formModel.form.invalid">SUBMIT</button>
+    </mat-card-actions>
+  </mat-card>
+</form>
+</div>
+  
